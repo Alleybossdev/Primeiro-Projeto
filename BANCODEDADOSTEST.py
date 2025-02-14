@@ -42,8 +42,14 @@ class Livro(Base):
 
 Base.metadata.create_all(bind=db)
 
-#CRUD
+
 
 usuario = Usuario(nome = "Gustavo", email="gcm@email.com", senha="123321")
 session.add(usuario)
+session.commit()
+
+usuario_gustavo= session.query(Usuario).filter_by(email="gcm@email.com").first()
+
+livro = Livros(titulo = "Primeiro livro", paginas=100, dono= usuario_gustavo.id)
+session.add(livro)
 session.commit()
